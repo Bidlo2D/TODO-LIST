@@ -1,0 +1,26 @@
+.cardComments {
+  position: relative;
+  margin-left: 8px;
+  width: 100%;
+}
+.itemCreate {
+  padding: 8px;
+  border-bottom: 2px solid black;
+  margin-bottom: 8px;
+  display: flex;
+}
+.commentsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto 0;
+}
+.taskNew {
+  font-size: 15px;
+}
+.completed {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #000;
+  margin-left: 8px;
+}

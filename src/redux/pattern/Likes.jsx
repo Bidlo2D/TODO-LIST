@@ -1,9 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import classes from "./css/Likes.module.css"
-import { incrementLikes, dicrementLikes, decrementLikes } from "../redux/action"
+import { incrementLikes, decrementLikes } from "../redux/action"
 const Likes = (props) => {
-  console.log("render > ", props)
   return (
     <div className={classes.likeControls}>
       <button
@@ -24,7 +23,6 @@ const Likes = (props) => {
   )
 }
 function mapStateToProps(state) {
-  console.log("mapStateToProps > ", state)
   const { likesReducer } = state
   return {
     likes: likesReducer.likes,
@@ -41,4 +39,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Likes) //новый компонент
+export default connect(mapStateToProps, mapDispatchToProps)(Likes) //новый компонент с подключенным Redux

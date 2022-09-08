@@ -1,12 +1,14 @@
-import './App.css';
-import Likes from './components/Likes';
-import content from './images/Aska.jpg';
-function App() {
+import './css/App.css';
+import React from "react"
+import Tasks from './components/Tasks';
+const App = () => {
   return (
     <div className="App">
-      <div className="wrap">
-        <img style={{ height: 600, width: 550 }} src={content} alt="No" />
-        <Likes></Likes>
+      <div className="wrapper">
+        <div className="header"></div>
+        <div className="wrap">
+          <Tasks />
+        </div>
       </div>
     </div>
   );

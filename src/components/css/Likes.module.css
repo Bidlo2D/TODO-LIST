@@ -1,1 +1,1 @@
-.likeControls{display:flex;align-items:center;justify-content:space-between}.button{width:50%;margin-top:5px;padding:10px}
+.likeControls{display:flex;align-items:center;justify-content:space-between}.button{box-shadow:0 0 8px rgba(109,109,109,.25);border-radius:8px;width:50%;padding:10px}
