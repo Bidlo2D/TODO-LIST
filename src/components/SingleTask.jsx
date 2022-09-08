@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import classes from "./css/SingleComment.module.css"
+import classes from "./css/SingleTask.module.css"
 import { commentDelete, commentRefresh, commentUpdate } from "../redux/action"
 import { useDispatch } from "react-redux"
 const SingleTask = (props) => {
@@ -43,18 +43,28 @@ const SingleTask = (props) => {
       onSubmit={handleUpdate}
       className={classes.commentsItem}
     >
-      {/* крестик */}
-      <span className={classes.commentItem} onClick={deleteComment}>
-        ✗
+      {/* выполнить */}
+      <span
+        style={{ color: "green", marginRight: 15 }}
+        className={classes.buttonTask}
+      >
+        ✓
       </span>
-      <span className={classes.commentItem}>✓</span>
       {/* строка ввода */}
       <input
         onChange={handleChange}
-        className={classes.commentItem}
+        className={classes.taskText}
         type="text"
         value={textComment}
       />
+      {/* удалить */}
+      <span
+        style={{ color: "red", marginLeft: 15 }}
+        className={classes.buttonTask}
+        onClick={deleteComment}
+      >
+        ✗
+      </span>
     </form>
   )
 }

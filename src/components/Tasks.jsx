@@ -4,12 +4,18 @@ import { useDispatch, useSelector } from "react-redux"
 import { commentCreate, commentLoad } from "../redux/action"
 import { CSSTransition } from "react-transition-group"
 import uniqid from "uniqid"
-import classes from "./css/Comments.module.css"
+//components
 import Spin from "./Spin"
 import SingleTask from "./SingleTask"
 import ErrorMessage from "./ErrorMessage"
-import "./css/CommAnim.css"
 import NoTask from "./NoTask"
+//css
+import "./css/CommAnim.css"
+import classes from "./css/Tasks.module.css"
+//image
+import plus from "../images/plus.png"
+import BlockWithImage from "./BlockWithImage"
+
 const Tasks = memo((props) => {
   const [textComment, setTextComment] = useState("")
   const dispatch = useDispatch()
@@ -46,8 +52,7 @@ const Tasks = memo((props) => {
           onChange={handleChange}
         />
         <input type="reset" hidden={true} />
-        <input type="button" value="1" className={classes.completed}></input>
-        <input type="button" value="2" className={classes.completed}></input>
+        <BlockWithImage onClick={handleSubmit}>{plus}</BlockWithImage>
       </form>
       <div className={classes.commentsWrap}>
         <Spin />
