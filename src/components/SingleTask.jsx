@@ -1,8 +1,14 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import classes from "./css/SingleTask.module.css"
 import { commentDelete, commentRefresh, commentUpdate } from "../redux/action"
 import { useDispatch } from "react-redux"
+// css
+import classes from "./css/SingleTask.module.css"
+// components
+import ButtonWithImage from "./ButtonWithImage"
+// images
+import bucket from "../images/bucket.png"
+import checkMark from "../images/checkMark.png"
 const SingleTask = (props) => {
   const { text, id } = props.comment
   const [textComment, setTextComment] = useState("нет текста")
@@ -15,6 +21,7 @@ const SingleTask = (props) => {
   const deleteComment = (e) => {
     dispatch(commentDelete(id))
   }
+  const completeTask = () => {}
   const handleChange = (e) => {
     setTextComment(e.target.value)
   }
@@ -44,12 +51,9 @@ const SingleTask = (props) => {
       className={classes.commentsItem}
     >
       {/* выполнить */}
-      <span
-        style={{ color: "green", marginRight: 15 }}
-        className={classes.buttonTask}
-      >
-        ✓
-      </span>
+      <ButtonWithImage classes={classes.buttonTask} onClick={completeTask}>
+        {checkMark}
+      </ButtonWithImage>
       {/* строка ввода */}
       <input
         onChange={handleChange}
@@ -58,13 +62,9 @@ const SingleTask = (props) => {
         value={textComment}
       />
       {/* удалить */}
-      <span
-        style={{ color: "red", marginLeft: 15 }}
-        className={classes.buttonTask}
-        onClick={deleteComment}
-      >
-        ✗
-      </span>
+      <ButtonWithImage classes={classes.buttonTask} onClick={deleteComment}>
+        {bucket}
+      </ButtonWithImage>
     </form>
   )
 }

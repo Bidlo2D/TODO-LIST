@@ -9,12 +9,13 @@ import Spin from "./Spin"
 import SingleTask from "./SingleTask"
 import ErrorMessage from "./ErrorMessage"
 import NoTask from "./NoTask"
+import ButtonWithImage from "./ButtonWithImage"
 //css
 import "./css/CommAnim.css"
 import classes from "./css/Tasks.module.css"
+import classesButton from "./css/AddTaskButton.module.css"
 //image
 import plus from "../images/plus.png"
-import BlockWithImage from "./BlockWithImage"
 
 const Tasks = memo((props) => {
   const [textComment, setTextComment] = useState("")
@@ -52,7 +53,9 @@ const Tasks = memo((props) => {
           onChange={handleChange}
         />
         <input type="reset" hidden={true} />
-        <BlockWithImage onClick={handleSubmit}>{plus}</BlockWithImage>
+        <ButtonWithImage classes={classesButton.add} onClick={handleSubmit}>
+          {plus}
+        </ButtonWithImage>
       </form>
       <div className={classes.commentsWrap}>
         <Spin />
