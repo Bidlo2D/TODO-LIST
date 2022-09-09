@@ -1,48 +1,44 @@
+import task from './classes/task'
 import {
-    DECREMENT,
-    INCREMENT,
     TEXT_CHANGE,
-    COMMENT_CREATE,
-    COMMENT_DELETE,
-    COMMENT_UPDATE,
-    COMMENTS_LOAD,
-    COMMENTS_REFRESH,
+    TASK_CREATE,
+    TASK_DELETE,
+    TASK_UPDATE,
+    TASKS_LOAD,
+    TASKS_REFRESH,
     LOADER_DISPLAY_ON,
     LOADER_DISPLAY_OFF,
     ERROR_DISPLAY_ON,
-    ERROR_DISPLAY_OFF
+    ERROR_DISPLAY_OFF,
+    TASK_CHANGE_STATUS
 } from './types'
-export function incrementLikes() {
-    return {
-        type: INCREMENT
-    }
-}
-export function decrementLikes() {
-    return {
-        type: DECREMENT
-    }
-}
 export function textChange(text) {
     return {
         type: TEXT_CHANGE,
         text
     }
 }
-export function commentCreate(text, id) {
+export function commentCreate(text) {
     return {
-        type: COMMENT_CREATE,
-        data: { text, id }
+        type: TASK_CREATE,
+        data: new task(text)
     }
 }
 export function commentDelete(id) {
     return {
-        type: COMMENT_DELETE,
+        type: TASK_DELETE,
         id
+    }
+}
+export function taskStatusChange(status, id) {
+    return {
+        type: TASK_CHANGE_STATUS,
+        data: { status, id }
     }
 }
 export function commentUpdate(text, id) {
     return {
-        type: COMMENT_UPDATE,
+        type: TASK_UPDATE,
         data: { text, id }
     }
 }
@@ -54,7 +50,7 @@ export function commentLoad() {
             const jsonData = await response.json()
             setTimeout(() => {
                 dispatch({
-                    type: COMMENTS_LOAD,
+                    type: TASKS_LOAD,
                     data: jsonData
                 })
                 dispatch(loaderOff())
@@ -68,7 +64,7 @@ export function commentLoad() {
 }
 export function commentRefresh(id1, id2) {
     return {
-        type: COMMENTS_REFRESH,
+        type: TASKS_REFRESH,
         data: { id1, id2 }
     }
 }

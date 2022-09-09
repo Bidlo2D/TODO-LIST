@@ -1,6 +1,11 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { commentDelete, commentRefresh, commentUpdate } from "../redux/action"
+import {
+  commentDelete,
+  commentRefresh,
+  commentUpdate,
+  taskStatusChange,
+} from "../redux/action"
 import { useDispatch } from "react-redux"
 // css
 import classes from "./css/SingleTask.module.css"
@@ -12,6 +17,7 @@ import checkMark from "../images/checkMark.png"
 const SingleTask = (props) => {
   const { text, id } = props.comment
   const [textComment, setTextComment] = useState("нет текста")
+  const [statusTask, setStatusTask] = useState(false)
   const dispatch = useDispatch()
   useEffect(() => {
     if (text) {
@@ -21,7 +27,10 @@ const SingleTask = (props) => {
   const deleteComment = (e) => {
     dispatch(commentDelete(id))
   }
-  const completeTask = () => {}
+  const completeTask = () => {
+    dispatch(taskStatusChange(!statusTask, id))
+    setStatusTask(!statusTask)
+  }
   const handleChange = (e) => {
     setTextComment(e.target.value)
   }

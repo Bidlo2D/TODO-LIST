@@ -23,8 +23,8 @@ const Tasks = memo((props) => {
   const show = useSelector((state) => {
     return state.loaderReducer.onMessage
   })
-  const comments = useSelector((state) => {
-    return state.commentsReducer.comments
+  const tasks = useSelector((state) => {
+    return state.commentsReducer.tasks
   })
   const spinnerShow = useSelector((state) => state.loaderReducer.onLoad)
   const handleChange = (e) => {
@@ -33,8 +33,7 @@ const Tasks = memo((props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const id = uniqid()
-    dispatch(commentCreate(textComment, id))
+    dispatch(commentCreate(textComment))
     setTextComment("")
   }
   useEffect(() => {
@@ -43,6 +42,7 @@ const Tasks = memo((props) => {
   const error = useSelector((state) => state.loaderReducer.error)
   return (
     <div className={classes.cardComments}>
+      <h1 className={classes.titleTask}>Задачи</h1>
       <form onSubmit={handleSubmit} className={classes.itemCreate}>
         <input
           className={classes.taskNew}
@@ -68,8 +68,8 @@ const Tasks = memo((props) => {
           {<ErrorMessage>{error}</ErrorMessage>}
         </CSSTransition>
         <div>
-          {comments.length > 0 || spinnerShow ? (
-            comments.map((comment) => (
+          {tasks.length > 0 || spinnerShow ? (
+            tasks.map((comment) => (
               <SingleTask id={comment.id} key={comment.id} comment={comment} />
             ))
           ) : (

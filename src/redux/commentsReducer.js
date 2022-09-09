@@ -1,47 +1,54 @@
-import { COMMENT_CREATE, COMMENT_DELETE, COMMENT_UPDATE, COMMENTS_LOAD, COMMENTS_REFRESH } from "./types";
+import task from "./classes/task";
+import { TASK_CREATE, TASK_DELETE, TASK_UPDATE, TASKS_LOAD, TASKS_REFRESH, TASK_CHANGE_STATUS } from "./types";
 const initialState = {
-    comments: []
+    tasks: []
 }
 export const commentsReducer = (state = initialState, action) => {
     /* console.log("comment reducer >>> ", action) */
-    /* console.log("comments >>> ", state.comments) */
+    /* console.log("tasks >>> ", state.tasks) */
     switch (action.type) {
-        case COMMENT_CREATE:
-            return { ...state, comments: [...state.comments, action.data] }
-        case COMMENT_DELETE:
+        case TASK_CREATE:
+            return { ...state, tasks: [...state.tasks, action.data] }
+        case TASK_DELETE:
             return (() => {
-                const { comments } = state
-                const newComments = comments.filter(comment => comment.id !== action.id)
-                return { ...state, comments: newComments }
+                const { tasks } = state
+                const newComments = tasks.filter(comment => comment.id !== action.id)
+                return { ...state, tasks: newComments }
             })()
-        case COMMENT_UPDATE:
+        case TASK_CHANGE_STATUS:
+            return (() => {
+                const { tasks } = state
+                const { data } = action
+                const index = tasks.findIndex(c => c.id === data.id)
+                const newComments = [...state.tasks]
+                newComments[index].status = data.status
+                return { ...state, tasks: newComments }
+            })()
+        case TASK_UPDATE:
             const { data } = action
-            const { comments } = state
-            const index = comments.findIndex(c => c.id === data.id)
+            const { tasks } = state
+            const index = tasks.findIndex(c => c.id === data.id)
             const newComments = [
-                ...comments.slice(0, index),
+                ...tasks.slice(0, index),
                 data,
-                ...comments.slice(index + 1)]
-            return { ...state, comments: newComments }
-        case COMMENTS_LOAD:
+                ...tasks.slice(index + 1)]
+            return { ...state, tasks: newComments }
+        case TASKS_LOAD:
             const commentsLoad = action.data.map(comm => {
-                return {
-                    text: comm.name,
-                    id: comm.id
-                }
+                return new task(comm.name);
             })
-            return { ...state, comments: commentsLoad }
-        case COMMENTS_REFRESH:
+            return { ...state, tasks: commentsLoad }
+        case TASKS_REFRESH:
             return (() => {
                 //arr[a] = arr.splice(b, 1, arr[a])[0];
                 //[arr[2], arr[5]]  = [arr[5], arr[2]];
                 const { data } = action;
-                const { comments } = state;
-                const id1 = comments.findIndex(c => c.id == data.id1);
-                const id2 = comments.findIndex(c => c.id == data.id2);
-                const commentsRefresh = [...comments];
+                const { tasks } = state;
+                const id1 = tasks.findIndex(c => c.id == data.id1);
+                const id2 = tasks.findIndex(c => c.id == data.id2);
+                const commentsRefresh = [...tasks];
                 [commentsRefresh[id1], commentsRefresh[id2]] = [commentsRefresh[id2], commentsRefresh[id1]]
-                return { ...state, comments: commentsRefresh }
+                return { ...state, tasks: commentsRefresh }
             })()
         default:
             return state;
