@@ -18,6 +18,7 @@ const SingleTask = (props) => {
   const { text, id } = props.comment
   const [textComment, setTextComment] = useState("нет текста")
   const [statusTask, setStatusTask] = useState(false)
+  const [styleOnClick, setStyleOnClick] = useState(classes.uncompleted)
   const dispatch = useDispatch()
   useEffect(() => {
     if (text) {
@@ -30,6 +31,11 @@ const SingleTask = (props) => {
   const completeTask = () => {
     dispatch(taskStatusChange(!statusTask, id))
     setStatusTask(!statusTask)
+    if (!statusTask) {
+      setStyleOnClick(classes.completed)
+    } else {
+      setStyleOnClick(classes.uncompleted)
+    }
   }
   const handleChange = (e) => {
     setTextComment(e.target.value)
@@ -57,10 +63,13 @@ const SingleTask = (props) => {
       onDragStart={onStartDrag}
       onDragOver={onDragOver}
       onSubmit={handleUpdate}
-      className={classes.commentsItem}
+      className={`${classes.commentsItem} ${styleOnClick}`}
     >
       {/* выполнить */}
-      <ButtonWithImage classes={classes.buttonTask} onClick={completeTask}>
+      <ButtonWithImage
+        classes={`${classes.buttonTask} ${styleOnClick}`}
+        onClick={completeTask}
+      >
         {checkMark}
       </ButtonWithImage>
       {/* строка ввода */}
@@ -71,7 +80,10 @@ const SingleTask = (props) => {
         value={textComment}
       />
       {/* удалить */}
-      <ButtonWithImage classes={classes.buttonTask} onClick={deleteComment}>
+      <ButtonWithImage
+        classes={`${classes.buttonTask} ${styleOnClick}`}
+        onClick={deleteComment}
+      >
         {bucket}
       </ButtonWithImage>
     </form>

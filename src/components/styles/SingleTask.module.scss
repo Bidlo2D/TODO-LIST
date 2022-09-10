@@ -1,9 +1,9 @@
+$borderSize: 2px;
 .commentsItem {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
   padding: 10px 6px;
-  border: 1px solid black;
   border-radius: 18px;
   /* background: rgba($color: #8f49af, $alpha: 0.15); */
 }
@@ -16,11 +16,16 @@
   display: flex;
   width: 30px;
   height: 30px;
-  border: 1px solid black;
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
   &:hover {
     opacity: 65%;
   }
+}
+.uncompleted {
+  border: $borderSize solid black;
+}
+.completed {
+  border: $borderSize solid green;
 }
