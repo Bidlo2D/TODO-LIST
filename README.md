@@ -12,7 +12,7 @@ A simple React application for creating a task list using redux to manage the st
 
 ### `npm install`
 
-В каталоге проекта можно запустить приложение с помощью:
+В каталоге проекта можно запустить приложение с помощью.
 2) In the project directory, you can launch the application using:
 
 ### `npm start`
