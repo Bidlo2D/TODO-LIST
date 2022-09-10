@@ -3,8 +3,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+1) Loading Node js modules (modules_node):
 
-In the project directory, you can run:
+### `npm install`
+
+2) In the project directory, you can run:
 
 ### `npm start`
 
